@@ -14,7 +14,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://192.168.88.67/soutenance/login.php', {
+      const response = await fetch('http://192.168.88.139/soutenance/login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, motDePasse: password }),

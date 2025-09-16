@@ -35,7 +35,7 @@ const SignUpScreen = () => {
     }
 
     try {
-      const response = await fetch('http://192.168.88.67/soutenance/register.php', {
+      const response = await fetch('http://192.168.88.139/soutenance/register.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

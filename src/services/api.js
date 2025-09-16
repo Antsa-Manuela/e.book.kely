@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.88.67/soutenance/api';
+const BASE_URL = 'http://192.168.88.139/soutenance/api';
 
 /**
  * 🔹 Récupère la liste des hôtels

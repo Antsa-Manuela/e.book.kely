@@ -2,6 +2,7 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
+import { API_URL } from '../../src/utils/config';
 
 export default function HotelDetails() {
   const { id } = useLocalSearchParams();
@@ -9,7 +10,7 @@ export default function HotelDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://192.168.88.67/soutenance/api/getHotelDetails.php?id=${id}`)
+    fetch(`${API_URL}/getHotelDetails.php?id=${id}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) setHotel(data.hotel);
