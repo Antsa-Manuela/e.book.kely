@@ -8,6 +8,7 @@ import {
   ScrollView, StyleSheet,
   Text, TextInput, TouchableOpacity, View
 } from 'react-native';
+import { BACKEND_URL } from '../utils/config';
 
 const SignUpScreen = () => {
   const router = useRouter();
@@ -33,22 +34,22 @@ const SignUpScreen = () => {
       Alert.alert('Erreur', 'Les mots de passe ne correspondent pas.');
       return;
     }
-
+  
     try {
-      const response = await fetch('http://192.168.88.139/soutenance/register.php', {
+      const response = await fetch(`${BACKEND_URL}/register.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: form1.email,
           nomComplet: form1.fullName,
           motDePasse: form1.password,
-          dateNaissance: form2.birthDate.toISOString().split('T')[0], // format YYYY-MM-DD
+          dateNaissance: form2.birthDate.toISOString().split('T')[0],
           sexe: form2.gender,
           ville: form2.city,
           cin: form2.cin,
         }),
       });
-
+  
       const data = await response.json();
       if (data.success) {
         Alert.alert('Succès', 'Compte créé !');
@@ -157,32 +158,32 @@ const SignUpScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
+    padding: 15,
     backgroundColor: '#F5F5F5',
     flex: 1,
   },  
   title: {
-    fontSize: 28,
-    marginBottom: 24,
-    fontWeight: '600',
+    fontSize: 20,
+    margin: 20,
     textAlign: 'center',
-    color: '#3C1518',
+    fontWeight: '700',
+    color: '#3C1518', // Couleur principale
   },
   label: {
     fontWeight: '500',
-    marginTop: 12,
+    marginTop: 1,
     marginBottom: 8,
     color: '#69140E', // Couleur secondaire pour différencier
-    fontSize: 15,
+    fontSize: 10,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#A44200',
-    padding: 14,
+    borderColor: '#A44200', // Accent tertiaire
+    backgroundColor: '#fff',
+    padding: 10,
     marginBottom: 16,
     borderRadius: 8,
-    backgroundColor: '#fff',
-    fontSize: 16,
+    fontSize: 10,
     color: '#3C1518',
   },
   pickerContainer: {
@@ -191,19 +192,21 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 16,
     backgroundColor: '#fff',
+    fontSize: 11,
   },
   picker: {
     color: '#3C1518',
+    fontSize: 11,
   },
   datesContainer: {
     flexDirection: 'row',
     backgroundColor: '#fff',
     borderRadius: 12,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   dateInput: {
     flex: 1,
-    padding: 12,
+    padding: 5,
   },
   dateLabel: {
     fontSize: 11,
@@ -212,61 +215,29 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   dateValue: {
-    fontSize: 15,
+    fontSize: 10,
     fontWeight: '500',
     color: '#000',
   },
   button: {
     backgroundColor: '#69140E', // Bouton primaire
-    paddingVertical: 14,
+    paddingVertical: 10,
     borderRadius: 12,
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 10,
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 10,
     fontWeight: '600',
   },
   link: {
-    marginTop: 20,
-    color: '#D58936',
+    color: '#D58936', // Accent orange doré
     textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
+    fontSize: 10,
   },
 });
 
 
 export default SignUpScreen;
-
-/*   container: { flex: 1, padding: 24, backgroundColor: '#f7f7f7' },
-  title: { fontSize: 26, fontWeight: '600', margin: 20, textAlign: 'center', color: '#000' },
-  searchInput: { backgroundColor: '#fff', padding: 16, borderRadius: 12, marginBottom: 20, fontSize: 16 },
-  datesContainer: { flexDirection: 'row', backgroundColor: '#fff', borderRadius: 12, marginBottom: 20 },
-  dateInput: { flex: 1, padding: 12 },
-  dateLabel: { fontSize: 11, color: '#767676', fontWeight: '600', marginBottom: 4 },
-  dateValue: { fontSize: 15, fontWeight: '500', color: '#000' },
-  dateSeparator: { width: 1, backgroundColor: '#e2e2e2', marginVertical: 10 },
-  paramsContainer: { backgroundColor: '#fff', borderRadius: 12, padding: 16, marginBottom: 20 },
-  paramRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 },
-  paramLabel: { fontSize: 16, color: '#000', fontWeight: '500' },
-  paramActions: { flexDirection: 'row', alignItems: 'center', gap: 16 },
-  paramButton: { width: 32, height: 32, borderRadius: 16, backgroundColor: '#f7f7f7', justifyContent: 'center', alignItems: 'center', borderColor: '#e2e2e2', borderWidth: 1 },
-  paramButtonText: { fontSize: 16, color: '#000' },
-  paramValue: { fontSize: 16, fontWeight: '500', width: 30, textAlign: 'center' },
-  searchButton: { backgroundColor: '#FF5A5F', padding: 16, borderRadius: 12, alignItems: 'center', marginBottom: 24 },
-  searchButtonText: { color: '#fff', fontWeight: '600', fontSize: 16 },
-  sectionTitle: { fontSize: 20, fontWeight: '600', marginBottom: 16, textAlign: 'center' },
-  hotelList: { paddingBottom: 24 },
-  hotelCard: { marginBottom: 24, borderRadius: 16, backgroundColor: '#f7f7f7', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.08, shadowRadius: 6, elevation: 4 },
-  hotelImage: { width: '100%', height: 200, borderTopLeftRadius: 16, borderTopRightRadius: 16 },
-  hotelInfoContainer: { padding: 16 },
-  hotelName: { fontSize: 18, fontWeight: '600', color: '#000', marginBottom: 4 },
-  hotelLocation: { fontSize: 14, color: '#767676', marginBottom: 6 },
-  hotelDescription: { fontSize: 14, color: '#484848', marginBottom: 8, lineHeight: 20 },
-  priceContainer: { flexDirection: 'row', alignItems: 'baseline' },
-  hotelPrice: { fontSize: 18, fontWeight: '600', color: '#000' },
-  perNight: { fontSize: 14, color: '#767676', marginLeft: 4 }, */
-
-

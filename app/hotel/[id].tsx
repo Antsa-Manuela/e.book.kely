@@ -1,4 +1,3 @@
-// app/hotel/[id].tsx
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
@@ -35,10 +34,5 @@ export default function HotelDetails() {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 20, backgroundColor: '#fff', flex: 1 },
-  image: { width: '100%', height: 200, borderRadius: 12 },
-  name: { fontSize: 22, fontWeight: '700', marginTop: 12, color: '#3C1518' },
-  location: { fontSize: 16, color: '#69140E' },
-  description: { marginTop: 10, fontSize: 14, color: '#484848' },
-  price: { marginTop: 10, fontSize: 18, fontWeight: '600', color: '#A44200' },
+// styles ici
 });
